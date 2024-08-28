@@ -1,14 +1,10 @@
 package app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -32,4 +28,8 @@ public class Student
     private LocalDate dateOfBirth;
     private LocalDate dateOfEnrollment;
     //private List<Integer courseId> courseIdList;
+
+    @ElementCollection
+    public static Set<Integer> courseList = new HashSet<>();
+
 }
