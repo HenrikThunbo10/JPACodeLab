@@ -19,7 +19,9 @@ public class StudentDAO implements IDAO<Student>
     {
         try (EntityManager em = emf.createEntityManager())
         {
-            return em.find(Student.class, id);
+            Student student = em.find(Student.class, id);
+            student.getCourseId().size();
+            return student;
         }
     }
 
@@ -28,8 +30,13 @@ public class StudentDAO implements IDAO<Student>
     {
         try (EntityManager em = emf.createEntityManager())
         {
-            TypedQuery query = em.createQuery("SELECT s FROM Student s", Student.class);
+            TypedQuery<Student> query = em.createQuery(
+                    "SELECT DISTINCT s FROM Student s LEFT JOIN FETCH s.courseId",
+                    Student.class
+            );
+
             List<Student> studentList = query.getResultList();
+
             return studentList.stream().collect(Collectors.toSet());
         }
     }
@@ -60,6 +67,11 @@ public class StudentDAO implements IDAO<Student>
     @Override
     public void delete(Student student)
     {
-
+        try(EntityManager em = emf.createEntityManager())
+        {
+            em.getTransaction().begin();
+            em.remove(getById(student.getId()));
+            em.getTransaction().commit();
+        }
     }
 }
