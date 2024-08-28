@@ -4,9 +4,9 @@ import java.util.Set;
 
 public interface IDAO<T>
 {
-    T getPersonById(Integer id);
+    T getById(Integer id);
 
-    Set<T> getAllPersons();
+    Set<T> getAll();
 
     void create(T t);
 
