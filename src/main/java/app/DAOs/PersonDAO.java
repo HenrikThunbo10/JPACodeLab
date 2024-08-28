@@ -16,7 +16,7 @@ public class PersonDAO implements IDAO<Person>
 
 
     @Override
-    public Person getPersonById(Integer id)
+    public Person getById(Integer id)
     {
         try (EntityManager em = emf.createEntityManager())
         {
@@ -25,7 +25,7 @@ public class PersonDAO implements IDAO<Person>
     }
 
     @Override
-    public Set<Person> getAllPersons()
+    public Set<Person> getAll()
     {
         try (EntityManager em = emf.createEntityManager())
         {
