@@ -1,22 +1,24 @@
 package app;
 
 import app.DAOs.CourseDAO;
-import app.DAOs.PersonDAO;
 import app.DAOs.StudentDAO;
 import app.entities.Course;
-import app.entities.Person;
 import app.entities.Student;
 
 import java.time.LocalDate;
+
+import java.util.HashSet;
+
 import java.util.Set;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Hello world!");
 
+        CourseDAO courseDAO = new CourseDAO();
         StudentDAO studentDAO = new StudentDAO();
+
 //        studentDAO.create(
 //                Student.builder()
 //                        .name("John")
@@ -45,16 +47,33 @@ public class Main
 //                        .build()
 //
 //        );
-        studentDAO.delete(
-                Student.builder()
-                        .id(4)
-                        .build()
-        );
+//        studentDAO.delete(
+//                Student.builder()
+//                        .id(4)
+//                        .build()
+//        );
 
-        studentDAO.getAll().forEach(System.out::println);
+//        studentDAO.getStudentCourses(1)
+//                .forEach(System.out::println);
+//        courseDAO.create(Course.builder()
+//                .courseName("Java class")
+//                .semester("1. sem")
+//                .courseFee(200)
+//                .teacherName("Signe")
+//                .build());
+
+        studentDAO.getStudentsByCourse(1)
+                .forEach(System.out::println);
+
 //        CourseDAO courseDAO = new CourseDAO();
 //        courseDAO.create(Course.builder().courseName("Java class").semester("1. sem").courseFee(200).teacherName("Signe").build());
 //        courseDAO.create(Course.builder().courseName("Frontend class").semester("2. sem").courseFee(800).teacherName("Jorg").build());
+//         courseDAO.getAll().forEach(System.out::println);
+
+
+        
+
+//        studentDAO.getAll().forEach(System.out::println);
 //        courseDAO.getAll().forEach(System.out::println);
 
     }

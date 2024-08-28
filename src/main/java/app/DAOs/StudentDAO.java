@@ -1,5 +1,6 @@
 package app.DAOs;
 
+import app.entities.Course;
 import app.entities.Student;
 import app.persistence.HibernateConfig;
 import jakarta.persistence.EntityManager;
@@ -74,4 +75,38 @@ public class StudentDAO implements IDAO<Student>
             em.getTransaction().commit();
         }
     }
+
+    public Set<Integer> getStudentCourses(Integer studentId)
+    {
+        try (EntityManager em = emf.createEntityManager())
+        {
+            Student student = em.find(Student.class, studentId);
+
+            {
+                // Ensure courses are fetched
+                Set<Integer> courses = student.getCourseId();
+                courses.size(); // Force initialization if using lazy loading
+                return courses;
+            }
+        }
+    }
+
+    public List<Student> getStudentsByCourse(Integer courseID)
+    {
+        try (EntityManager em = emf.createEntityManager())
+        {
+            TypedQuery<Student> query = em.createQuery(
+                    "SELECT DISTINCT s FROM Student s LEFT JOIN FETCH s.courseId",
+                    Student.class
+            );
+
+            List<Student> allStudents = query.getResultList();
+
+            // Use streams to filter students who are enrolled in the specified course
+            return allStudents.stream()
+                    .filter(student -> student.getCourseId().contains(courseID))
+                    .collect(Collectors.toList());
+        }
+    }
+
 }
