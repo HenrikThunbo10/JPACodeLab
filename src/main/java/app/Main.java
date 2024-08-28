@@ -47,23 +47,34 @@ public class Main
 //                        .build()
 //
 //        );
-        studentDAO.delete(
-                Student.builder()
-                        .id(4)
-                        .build()
-        );
+//        studentDAO.delete(
+//                Student.builder()
+//                        .id(4)
+//                        .build()
+//        );
 
-        studentDAO.getAll().forEach(System.out::println);
+//        studentDAO.getStudentCourses(1)
+//                .forEach(System.out::println);
+//        courseDAO.create(Course.builder()
+//                .courseName("Java class")
+//                .semester("1. sem")
+//                .courseFee(200)
+//                .teacherName("Signe")
+//                .build());
+
+        studentDAO.getStudentsByCourse(1)
+                .forEach(System.out::println);
+
 //        CourseDAO courseDAO = new CourseDAO();
 //        courseDAO.create(Course.builder().courseName("Java class").semester("1. sem").courseFee(200).teacherName("Signe").build());
 //        courseDAO.create(Course.builder().courseName("Frontend class").semester("2. sem").courseFee(800).teacherName("Jorg").build());
-//        courseDAO.getAll().forEach(System.out::println);
+//         courseDAO.getAll().forEach(System.out::println);
 
 
         
 
-        studentDAO.getAll().forEach(System.out::println);
-        courseDAO.getAll().forEach(System.out::println);
+//        studentDAO.getAll().forEach(System.out::println);
+//        courseDAO.getAll().forEach(System.out::println);
 
     }
 }
