@@ -1,6 +1,6 @@
 package app.DAOs;
 
-import app.entities.Person;
+import app.entities.Student;
 import app.persistence.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,51 +10,55 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class PersonDAO implements IDAO<Person>
+public class StudentDAO implements IDAO<Student>
 {
     private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
-
     @Override
-    public Person getById(Integer id)
+    public Student getById(Integer id)
     {
         try (EntityManager em = emf.createEntityManager())
         {
-            return em.find(Person.class, id);
+            return em.find(Student.class, id);
         }
     }
 
     @Override
-    public Set<Person> getAll()
+    public Set getAll()
     {
         try (EntityManager em = emf.createEntityManager())
         {
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-            List<Person> personList = query.getResultList();
-            return personList.stream().collect(Collectors.toSet());
+            TypedQuery query = em.createQuery("SELECT s FROM Student s", Student.class);
+            List<Student> studentList = query.getResultList();
+            return studentList.stream().collect(Collectors.toSet());
         }
     }
 
-
     @Override
-    public void create(Person person)
+    public void create(Student student)
     {
         try (EntityManager em = emf.createEntityManager())
         {
             em.getTransaction().begin();
-            em.persist(person);
+            em.persist(student);
             em.getTransaction().commit();
         }
     }
 
     @Override
-    public void update(Person person)
+    public void update(Student student)
     {
-
+        try(EntityManager em = emf.createEntityManager())
+        {
+            em.getTransaction().begin();
+            getById(student.getId());
+            em.merge(student);
+            em.getTransaction().commit();
+        }
     }
 
     @Override
-    public void delete(Person person)
+    public void delete(Student student)
     {
 
     }
