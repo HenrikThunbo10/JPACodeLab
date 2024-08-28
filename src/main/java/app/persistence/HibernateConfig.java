@@ -1,4 +1,4 @@
-package org.example.persistence;
+package app.persistence;
 
 
 import jakarta.persistence.EntityManagerFactory;
@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
+
 
 /**
  * Purpose: This class is used to configure Hibernate and create an EntityManagerFactory.
@@ -33,10 +34,7 @@ public class HibernateConfig {
     }
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration) {
-        configuration.addAnnotatedClass(Boat.class);
-        configuration.addAnnotatedClass(Harbour.class);
-        configuration.addAnnotatedClass(Owner.class);
-        configuration.addAnnotatedClass(Seat.class);
+        configuration.addAnnotatedClass(Person.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {
@@ -69,7 +67,7 @@ public class HibernateConfig {
 
 
     private static String getDBName() {
-        return Utils.getPropertyValue("db.name", "properties-from-pom.properties");
+        return "jpademo";
     }
     private static Properties setBaseProperties(Properties props){
         props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
@@ -90,8 +88,8 @@ public class HibernateConfig {
     }
     private static Properties setDevProperties(Properties props){
         props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/"+ getDBName());
-        props.put("hibernate.connection.username", "dev");
-        props.put("hibernate.connection.password", "ax2");
+        props.put("hibernate.connection.username", "postgres");
+        props.put("hibernate.connection.password", "postgres");
         return props;
     }
     private static Properties setTestProperties(Properties props){
