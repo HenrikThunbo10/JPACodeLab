@@ -1,7 +1,9 @@
 package app;
 
+import app.DAOs.CourseDAO;
 import app.DAOs.PersonDAO;
 import app.DAOs.StudentDAO;
+import app.entities.Course;
 import app.entities.Person;
 import app.entities.Student;
 
@@ -43,6 +45,10 @@ public class Main
 
         );
         studentDAO.getAll().forEach(System.out::println);
+        CourseDAO courseDAO = new CourseDAO();
+        courseDAO.create(Course.builder().courseName("Java class").semester("1. sem").courseFee(200).teacherName("Signe").build());
+        courseDAO.create(Course.builder().courseName("Frontend class").semester("2. sem").courseFee(800).teacherName("Jorg").build());
+        courseDAO.getAll().forEach(System.out::println);
 
     }
 }
