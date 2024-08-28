@@ -1,7 +1,11 @@
 package app.entities;
 
 import jakarta.persistence.*;
+import app.entities.Student;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,5 +23,6 @@ public class Course
     private String semester;
     private double courseFee;
     private String teacherName;
+
 
 }
