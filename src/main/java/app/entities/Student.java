@@ -4,7 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import java.util.*;
+
 
 
 @Entity
@@ -27,9 +34,9 @@ public class Student
     private String status;
     private LocalDate dateOfBirth;
     private LocalDate dateOfEnrollment;
-    //private List<Integer courseId> courseIdList;
 
     @ElementCollection
-    public static Set<Integer> courseList = new HashSet<>();
+    private Set<Integer> courseId;
 
+ 
 }
